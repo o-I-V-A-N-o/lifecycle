@@ -18,12 +18,13 @@ function Watches(props){
   const handleSubmit = evt => {
     evt.preventDefault();
     
-    setSity([...sities, form])
+    setSity([...sities, form]);
+    setForm(prevForm => ({...prevForm, sity: '', timeoffset: ''}));
   }
 
   const[form, setForm]= useState({
     sity: '',
-    timeoffset: null
+    timeoffset: ''
   });
 
   const handleNameChangeSity = evt => {
@@ -51,15 +52,15 @@ function Watches(props){
     hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours(),
     minutes = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes(),
     seconds = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
-    console.log('11')
+    console.log('11');
     return {hours, minutes, seconds}
   }
 
   return(
     <div className="progress-bar">
       <form onSubmit={handleSubmit}>
-        <input id="sity" type="text" name="sity" onChange={handleNameChangeSity}/>
-        <input id="timeoffset" type="text" name="timeoffset" onChange={handleNameChangeTimeoffset}/>
+        <input id="sity" type="text" name="sity" value={form.sity} onChange={handleNameChangeSity} required/>
+        <input id="timeoffset" type="text" name="timeoffset" value={form.timeoffset} onChange={handleNameChangeTimeoffset} required/>
         <button>ОК</button>
       </form>
       {sities.map((item, index) => 
